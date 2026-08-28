@@ -1,0 +1,8 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body { font-family: Arial, Helvetica, sans-serif; background: #f7f7f7; color: #171717; }
+.shell { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.hero { width: min(720px, 100%); background: #fff; border: 1px solid #e8e8e8; border-radius: 24px; padding: 32px; box-shadow: 0 12px 40px rgba(0,0,0,.06); }
+.hero h1 { margin: 14px 0 12px; font-size: clamp(2rem, 6vw, 4rem); line-height: 1; }
+.hero p { margin: 0; font-size: 1.05rem; line-height: 1.6; color: #555; }
+.badge { display: inline-flex; padding: 8px 12px; border-radius: 999px; background: #efefef; font-size: .85rem; font-weight: 700; }
