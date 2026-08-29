@@ -3,6 +3,16 @@ export type ProductUnit = (typeof PRODUCT_UNITS)[number];
 export type InventoryStatus = "in_stock" | "low" | "out";
 export type ShoppingProfile = "economic" | "balanced" | "practical";
 
+export const PRODUCT_UNIT_LABELS: Record<ProductUnit, string> = {
+  kg: "quilograma (kg)",
+  g: "grama (g)",
+  l: "litro (L)",
+  ml: "mililitro (ml)",
+  unit: "unidade",
+  roll: "rolo",
+  package: "embalagem",
+};
+
 export type HouseholdProduct = {
   id: string;
   name: string;
