@@ -170,7 +170,7 @@ A Sprint 5 passa quando o estoque representa claramente número de embalagens, r
 | Sprint 2 | Validada | 29/08/2026 | Fluxo funcional aprovado antes da integração. |
 | Sprint 3 | Validada | 29/08/2026 | Preços por filial e comparação de mercados aprovados. |
 | Sprint 4 | Validada | 29/08/2026 | Modo compra, fechamento e histórico aprovados. |
-| Sprint 5 | Pendente | — | Aguardando teste funcional autenticado. |
+| Sprint 5 | Validada | 29/08/2026 | Recomendações inteligentes e semântica de embalagens aprovadas. |
 
 ## Regra para próximas Sprints
 Para cada nova Sprint, adicionar neste mesmo documento: objetivo, preparação, testes em ordem, valores de exemplo, resultados esperados, persistência, entradas inválidas, regressão e critério objetivo de aprovação.
