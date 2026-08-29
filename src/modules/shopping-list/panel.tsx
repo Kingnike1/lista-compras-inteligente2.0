@@ -40,7 +40,14 @@ export function ShoppingListPanel({ householdId, products }: { householdId: stri
     }
 
     if (data) {
-      setList(data as ShoppingList);
+      const raw = data as unknown as ShoppingList & {
+        shopping_list_items: Array<ShoppingListItem & { products: ShoppingListItem["products"] | ShoppingListItem["products"][] }>;
+      };
+      const shopping_list_items: ShoppingListItem[] = raw.shopping_list_items.map(item => ({
+        ...item,
+        products: Array.isArray(item.products) ? item.products[0] ?? null : item.products,
+      }));
+      setList({ ...raw, shopping_list_items });
       setLoading(false);
       return;
     }
