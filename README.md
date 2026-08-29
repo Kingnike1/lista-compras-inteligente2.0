@@ -1,2 +1,1 @@
-
-# lista-compras-inteligente2.0
+# Lista de Compras Inteligente 2.0
