@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./ux-refinements.css";
 
 export const metadata: Metadata = {
   title: "Lista de Compras Inteligente",
