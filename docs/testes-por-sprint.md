@@ -32,7 +32,6 @@ Validar autenticação, perfil da casa, cadastro de produtos e controle básico 
 - [ ] Confirmar novamente a persistência dos dados.
 
 ### Critério de aprovação
-
 A Sprint 1 passa quando autenticação, Minha Casa, produtos e estoque funcionam sem erros e os dados persistem após atualização e novo login.
 
 ---
@@ -43,11 +42,7 @@ A Sprint 1 passa quando autenticação, Minha Casa, produtos e estoque funcionam
 Validar criação da lista, orçamento, prioridades, quantidades, preços previstos e persistência.
 
 ### Preparação
-
-Ter pelo menos dois produtos cadastrados na Minha Casa. Exemplo:
-
-- Arroz — pacote de 5 kg
-- Feijão — pacote de 1 kg
+Ter pelo menos dois produtos cadastrados na Minha Casa. Exemplo: Arroz — pacote de 5 kg; Feijão — pacote de 1 kg.
 
 ### Fluxo de teste
 
@@ -58,22 +53,16 @@ Ter pelo menos dois produtos cadastrados na Minha Casa. Exemplo:
 - [ ] Definir, por exemplo, **30 dias planejados** e salvar.
 - [ ] Adicionar Arroz: quantidade `2`, prioridade **Essencial**, preço previsto `R$ 20,00` por embalagem.
 - [ ] Adicionar Feijão: quantidade `3`, prioridade **Necessário**, preço previsto `R$ 8,00` por embalagem.
-- [ ] Confirmar o cálculo do Arroz: `2 × R$ 20 = R$ 40`.
-- [ ] Confirmar o cálculo do Feijão: `3 × R$ 8 = R$ 24`.
-- [ ] Confirmar **Total previsto = R$ 64**.
-- [ ] Confirmar **Saldo previsto = R$ 36**.
-- [ ] Marcar um item como comprado e verificar a mudança visual.
-- [ ] Desmarcar e confirmar que ele volta ao estado normal.
-- [ ] Remover um item e confirmar que desaparece.
-- [ ] Adicionar novamente um produto já existente e confirmar que o sistema não cria duplicação incoerente.
-- [ ] Ativar/iniciar a compra e confirmar a mudança de status da lista.
-- [ ] Atualizar a página e confirmar que a lista continua salva.
-- [ ] Sair e entrar novamente e confirmar a persistência.
-- [ ] Alterar o orçamento para **R$ 20** mantendo itens acima desse total.
-- [ ] Confirmar que o saldo previsto fica negativo.
+- [ ] Confirmar `2 × R$ 20 = R$ 40` e `3 × R$ 8 = R$ 24`.
+- [ ] Confirmar **Total previsto = R$ 64** e **Saldo previsto = R$ 36**.
+- [ ] Marcar e desmarcar item como comprado.
+- [ ] Remover e adicionar item novamente sem duplicação incoerente.
+- [ ] Ativar/iniciar a compra e confirmar mudança de status.
+- [ ] Atualizar a página e confirmar persistência.
+- [ ] Sair e entrar novamente e confirmar persistência.
+- [ ] Alterar orçamento para **R$ 20** e confirmar saldo negativo.
 
 ### Critério de aprovação
-
 A Sprint 2 passa quando os cálculos batem exatamente, a lista não perde nem mistura produtos, os estados funcionam e tudo persiste após atualização e novo login.
 
 ---
@@ -84,80 +73,23 @@ A Sprint 2 passa quando os cálculos batem exatamente, a lista não perde nem mi
 Validar mercados, filiais físicas, preços observados e comparação determinística do custo da lista.
 
 ### Preparação
-
 Ter uma lista de compras com pelo menos dois produtos, por exemplo Arroz e Feijão.
 
 ### Fluxo de teste
 
-- [ ] Entrar com a conta Google.
-- [ ] Confirmar que dados das Sprints anteriores continuam aparecendo normalmente.
-- [ ] Cadastrar o primeiro mercado, por exemplo **Atacadão**.
-- [ ] Cadastrar uma filial, por exemplo **Setor X**, informando a cidade.
-- [ ] Cadastrar o segundo mercado, por exemplo **Assaí**.
-- [ ] Cadastrar uma filial, por exemplo **Centro**.
-- [ ] Registrar Arroz no Atacadão por `R$ 20,00`.
-- [ ] Registrar Arroz no Assaí por `R$ 18,00`.
-- [ ] Registrar Feijão no Atacadão por `R$ 8,00`.
-- [ ] Registrar Feijão no Assaí por `R$ 10,00`.
-
-### Teste matemático da comparação
-
-Considerando uma lista com:
-
-- 2 embalagens de Arroz
-- 3 embalagens de Feijão
-
-O resultado esperado é:
-
-**Atacadão**
-
-`2 × R$ 20 + 3 × R$ 8 = R$ 64`
-
-**Assaí**
-
-`2 × R$ 18 + 3 × R$ 10 = R$ 66`
-
-- [ ] Confirmar que o Atacadão aparece com total de **R$ 64**.
-- [ ] Confirmar que o Assaí aparece com total de **R$ 66**.
-- [ ] Confirmar que o Atacadão é identificado como a opção mais barata entre os mercados com cobertura completa.
-
-### Cobertura parcial
-
-- [ ] Adicionar um terceiro produto à lista.
-- [ ] Registrar preço desse produto somente em um dos mercados.
-- [ ] Confirmar que o outro mercado informa que falta preço.
-- [ ] Confirmar que o sistema **não inventa preço** para completar a comparação.
-
-### Separação por filial
-
-- [ ] Criar duas filiais do mesmo mercado.
-- [ ] Registrar preços diferentes do mesmo produto nas duas filiais.
-- [ ] Confirmar que os valores permanecem separados por filial física.
-
-### Preço por embalagem e preço unitário
-
-Exemplo: pacote de Arroz de `5 kg` custando `R$ 25`.
-
-- [ ] Confirmar que o preço observado representa a embalagem inteira.
-- [ ] Quando o preço unitário derivado for exibido, confirmar resultado equivalente a `R$ 5/kg`.
-
-### Seleção do mercado
-
-- [ ] Selecionar um mercado para realizar a compra.
-- [ ] Selecionar outro mercado.
-- [ ] Confirmar que apenas **um mercado** permanece selecionado para a lista.
-- [ ] Atualizar a página e confirmar que a seleção permanece salva.
-- [ ] Sair e entrar novamente e confirmar persistência.
-
-### Validações de entrada
-
-- [ ] Tentar cadastrar preço negativo e confirmar que é rejeitado.
-- [ ] Tentar cadastrar preço zero e confirmar que é rejeitado quando não representar um preço válido.
-- [ ] Tentar salvar mercado ou filial sem os campos obrigatórios.
-- [ ] Confirmar que a interface não quebra e não grava dados inválidos.
+- [ ] Cadastrar dois mercados e suas filiais.
+- [ ] Registrar preços diferentes de Arroz e Feijão nas filiais.
+- [ ] Para 2 Arroz a R$20 e 3 Feijão a R$8, confirmar total R$64.
+- [ ] Para 2 Arroz a R$18 e 3 Feijão a R$10, confirmar total R$66.
+- [ ] Confirmar que a opção completa mais barata é identificada corretamente.
+- [ ] Com cobertura parcial, confirmar que preço ausente nunca é inventado.
+- [ ] Criar duas filiais da mesma rede e confirmar preços separados.
+- [ ] Para pacote de 5 kg a R$25, confirmar preço da embalagem e derivado R$5/kg quando exibido.
+- [ ] Selecionar mercado e confirmar que somente um fica selecionado.
+- [ ] Atualizar e relogar para confirmar persistência.
+- [ ] Confirmar rejeição de preço negativo/zero inválido e campos obrigatórios ausentes.
 
 ### Critério de aprovação
-
 A Sprint 3 passa quando os totais são matematicamente corretos, preços ausentes nunca são inventados, filiais não têm seus preços misturados, somente um mercado pode ser selecionado, os dados persistem e não há regressão das Sprints anteriores.
 
 ---
@@ -168,83 +100,77 @@ A Sprint 3 passa quando os totais são matematicamente corretos, preços ausente
 Validar a execução da compra no mercado, preço real por item, total real, fechamento atômico e histórico de compras.
 
 ### Preparação
-
 - Ter uma lista com pelo menos dois itens.
 - Clicar em **Começar compra** para deixar a lista ativa.
 - Escolher um mercado na comparação da Sprint 3.
 
 ### Fluxo de teste
 
-- [ ] Confirmar que a área **Modo compra** aparece com a lista ativa.
-- [ ] Confirmar que o mercado selecionado é exibido corretamente.
-- [ ] Marcar o primeiro item como comprado.
-- [ ] Informar o preço real por embalagem do primeiro item.
-- [ ] Marcar o segundo item como comprado.
-- [ ] Informar o preço real por embalagem do segundo item.
-- [ ] Confirmar que o total real muda imediatamente conforme os preços digitados.
-
-### Teste matemático
-
-Exemplo:
-
-- Arroz: quantidade `2`, preço real `R$ 21,00`
-- Feijão: quantidade `3`, preço real `R$ 7,50`
-
-Resultado esperado:
-
-`2 × R$ 21 + 3 × R$ 7,50 = R$ 64,50`
-
-- [ ] Confirmar **Total real = R$ 64,50**.
-- [ ] Se o orçamento for `R$ 100`, confirmar **Saldo do orçamento = R$ 35,50**.
-- [ ] Reduzir o orçamento abaixo de `R$ 64,50` e confirmar saldo negativo quando aplicável.
-
-### Validações antes do fechamento
-
-- [ ] Tentar finalizar sem mercado selecionado e confirmar bloqueio.
-- [ ] Tentar finalizar sem nenhum item marcado e confirmar bloqueio.
-- [ ] Marcar um item e deixar o preço real vazio; confirmar bloqueio.
-- [ ] Tentar preço `0` ou negativo e confirmar rejeição.
-
-### Fechamento
-
-- [ ] Marcar os itens efetivamente comprados.
-- [ ] Informar preços reais positivos para todos eles.
-- [ ] Clicar em **Finalizar compra**.
-- [ ] Confirmar que a compra é finalizada apenas uma vez.
-- [ ] Confirmar que a lista ativa deixa de aparecer no Modo compra.
-- [ ] Confirmar que o total final é exatamente o total calculado antes do fechamento.
-
-### Histórico
-
-- [ ] Confirmar que a compra finalizada aparece em **Histórico de compras**.
-- [ ] Confirmar mercado/filial, data e total.
-- [ ] Confirmar cada item, quantidade, preço unitário e subtotal.
-- [ ] Atualizar a página e confirmar que o histórico permanece.
-- [ ] Sair e entrar novamente e confirmar persistência.
-
-### Próxima compra
-
-- [ ] Voltar à Lista de compras.
-- [ ] Confirmar que o sistema permite criar/carregar uma nova lista para a próxima compra.
-- [ ] Confirmar que a compra antiga permanece apenas no histórico e não é misturada com a nova lista.
+- [ ] Confirmar que **Modo compra** aparece com a lista ativa e mercado correto.
+- [ ] Marcar itens e informar preço real por embalagem.
+- [ ] Confirmar total real mudando imediatamente.
+- [ ] Arroz 2 × R$21 + Feijão 3 × R$7,50 = **R$64,50**.
+- [ ] Com orçamento R$100, confirmar saldo **R$35,50**.
+- [ ] Confirmar bloqueio sem mercado, sem item marcado ou com preço inválido.
+- [ ] Finalizar e confirmar fechamento apenas uma vez.
+- [ ] Confirmar que lista ativa desaparece do Modo compra.
+- [ ] Confirmar compra no histórico com mercado, data, total, itens e subtotais.
+- [ ] Atualizar e relogar para confirmar persistência.
+- [ ] Criar próxima compra sem misturar a compra anterior.
 
 ### Critério de aprovação
-
 A Sprint 4 passa quando o total real é determinístico, fechamento inválido é bloqueado, a compra gera um único registro consistente, o histórico persiste e nenhuma funcionalidade das Sprints 1–3 sofre regressão.
 
 ---
 
-## Registro de validação
+## Sprint 5 — Recomendações inteligentes e semântica de embalagens
 
-Ao finalizar cada Sprint, registrar o resultado abaixo.
+### Objetivo
+Validar recomendações determinísticas de reposição e a interpretação do estoque como quantidade de embalagens, sem inventar preços e sem adicionar itens automaticamente.
+
+### Preparação
+- Ter Arroz pacote de 5 kg, Feijão pacote de 1 kg e Leite caixa de 1 L cadastrados.
+
+### Embalagens e estoque
+- [ ] Confirmar unidades do cadastro em português.
+- [ ] Cadastrar Arroz com embalagem `5 kg` e `3` embalagens em casa.
+- [ ] Confirmar **3 embalagens**, e não **3 kg**.
+- [ ] Confirmar **Total em casa: 15 kg**.
+- [ ] Confirmar que `+` e `−` alteram uma embalagem inteira e nunca ficam negativos.
+
+### Recomendações
+- [ ] Marcar Arroz como **Acabou** e confirmar recomendação com motivo `acabou em casa`.
+- [ ] Marcar Feijão como **Acabando** e confirmar recomendação com motivo `estoque acabando`.
+- [ ] Manter Leite **Em casa** e confirmar que não é sugerido apenas por estar cadastrado.
+- [ ] Alternar perfis Econômico, Equilibrado e Prático e observar quantidades coerentes com cada perfil.
+- [ ] Se houver histórico, confirmar que frequência recente aparece como motivo complementar.
+- [ ] Confirmar que ausência de histórico não impede recomendação por estoque.
+
+### Adicionar à lista
+- [ ] Clicar **Adicionar à lista** e confirmar inclusão em embalagens.
+- [ ] Clicar novamente e confirmar ausência de duplicação incoerente.
+- [ ] Confirmar que nada é adicionado sem clique do usuário.
+- [ ] Confirmar que nenhum preço é criado ou inventado.
+
+### Persistência e regressão
+- [ ] Atualizar e relogar; confirmar estoque, perfil e lista.
+- [ ] Confirmar comparação de mercados usando preço por embalagem × quantidade de embalagens.
+- [ ] Confirmar Modo compra e histórico da Sprint 4 funcionando.
+
+### Critério de aprovação
+A Sprint 5 passa quando o estoque representa claramente número de embalagens, recomendações surgem apenas por regras explicáveis de estoque/perfil/histórico, nenhuma sugestão é adicionada sem confirmação, nenhum preço é inventado e as Sprints anteriores continuam funcionando.
+
+---
+
+## Registro de validação
 
 | Sprint | Status | Data | Observações |
 | --- | --- | --- | --- |
 | Sprint 1 | Validada | — | Fluxo funcional aprovado antes da integração. |
 | Sprint 2 | Validada | 29/08/2026 | Fluxo funcional aprovado antes da integração. |
 | Sprint 3 | Validada | 29/08/2026 | Preços por filial e comparação de mercados aprovados. |
-| Sprint 4 | Pendente | — | Aguardando teste funcional autenticado. |
+| Sprint 4 | Validada | 29/08/2026 | Modo compra, fechamento e histórico aprovados. |
+| Sprint 5 | Pendente | — | Aguardando teste funcional autenticado. |
 
 ## Regra para próximas Sprints
-
 Para cada nova Sprint, adicionar neste mesmo documento: objetivo, preparação, testes em ordem, valores de exemplo, resultados esperados, persistência, entradas inválidas, regressão e critério objetivo de aprovação.
