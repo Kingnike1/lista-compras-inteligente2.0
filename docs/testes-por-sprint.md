@@ -158,15 +158,79 @@ Exemplo: pacote de Arroz de `5 kg` custando `R$ 25`.
 
 ### Critério de aprovação
 
-A Sprint 3 passa quando:
+A Sprint 3 passa quando os totais são matematicamente corretos, preços ausentes nunca são inventados, filiais não têm seus preços misturados, somente um mercado pode ser selecionado, os dados persistem e não há regressão das Sprints anteriores.
 
-- os totais são matematicamente corretos;
-- preços ausentes nunca são inventados;
-- filiais não têm seus preços misturados;
-- somente um mercado pode ser selecionado para a compra;
-- os dados persistem após atualização e novo login;
-- entradas inválidas são rejeitadas;
-- nenhuma funcionalidade validada nas Sprints 1 e 2 sofre regressão.
+---
+
+## Sprint 4 — Modo compra, fechamento e histórico
+
+### Objetivo
+Validar a execução da compra no mercado, preço real por item, total real, fechamento atômico e histórico de compras.
+
+### Preparação
+
+- Ter uma lista com pelo menos dois itens.
+- Clicar em **Começar compra** para deixar a lista ativa.
+- Escolher um mercado na comparação da Sprint 3.
+
+### Fluxo de teste
+
+- [ ] Confirmar que a área **Modo compra** aparece com a lista ativa.
+- [ ] Confirmar que o mercado selecionado é exibido corretamente.
+- [ ] Marcar o primeiro item como comprado.
+- [ ] Informar o preço real por embalagem do primeiro item.
+- [ ] Marcar o segundo item como comprado.
+- [ ] Informar o preço real por embalagem do segundo item.
+- [ ] Confirmar que o total real muda imediatamente conforme os preços digitados.
+
+### Teste matemático
+
+Exemplo:
+
+- Arroz: quantidade `2`, preço real `R$ 21,00`
+- Feijão: quantidade `3`, preço real `R$ 7,50`
+
+Resultado esperado:
+
+`2 × R$ 21 + 3 × R$ 7,50 = R$ 64,50`
+
+- [ ] Confirmar **Total real = R$ 64,50**.
+- [ ] Se o orçamento for `R$ 100`, confirmar **Saldo do orçamento = R$ 35,50**.
+- [ ] Reduzir o orçamento abaixo de `R$ 64,50` e confirmar saldo negativo quando aplicável.
+
+### Validações antes do fechamento
+
+- [ ] Tentar finalizar sem mercado selecionado e confirmar bloqueio.
+- [ ] Tentar finalizar sem nenhum item marcado e confirmar bloqueio.
+- [ ] Marcar um item e deixar o preço real vazio; confirmar bloqueio.
+- [ ] Tentar preço `0` ou negativo e confirmar rejeição.
+
+### Fechamento
+
+- [ ] Marcar os itens efetivamente comprados.
+- [ ] Informar preços reais positivos para todos eles.
+- [ ] Clicar em **Finalizar compra**.
+- [ ] Confirmar que a compra é finalizada apenas uma vez.
+- [ ] Confirmar que a lista ativa deixa de aparecer no Modo compra.
+- [ ] Confirmar que o total final é exatamente o total calculado antes do fechamento.
+
+### Histórico
+
+- [ ] Confirmar que a compra finalizada aparece em **Histórico de compras**.
+- [ ] Confirmar mercado/filial, data e total.
+- [ ] Confirmar cada item, quantidade, preço unitário e subtotal.
+- [ ] Atualizar a página e confirmar que o histórico permanece.
+- [ ] Sair e entrar novamente e confirmar persistência.
+
+### Próxima compra
+
+- [ ] Voltar à Lista de compras.
+- [ ] Confirmar que o sistema permite criar/carregar uma nova lista para a próxima compra.
+- [ ] Confirmar que a compra antiga permanece apenas no histórico e não é misturada com a nova lista.
+
+### Critério de aprovação
+
+A Sprint 4 passa quando o total real é determinístico, fechamento inválido é bloqueado, a compra gera um único registro consistente, o histórico persiste e nenhuma funcionalidade das Sprints 1–3 sofre regressão.
 
 ---
 
@@ -178,18 +242,9 @@ Ao finalizar cada Sprint, registrar o resultado abaixo.
 | --- | --- | --- | --- |
 | Sprint 1 | Validada | — | Fluxo funcional aprovado antes da integração. |
 | Sprint 2 | Validada | 29/08/2026 | Fluxo funcional aprovado antes da integração. |
-| Sprint 3 | Pendente | — | Aguardando teste funcional autenticado. |
+| Sprint 3 | Validada | 29/08/2026 | Preços por filial e comparação de mercados aprovados. |
+| Sprint 4 | Pendente | — | Aguardando teste funcional autenticado. |
 
 ## Regra para próximas Sprints
 
-A partir da Sprint 4, adicionar neste mesmo documento uma nova seção contendo:
-
-1. objetivo da Sprint;
-2. preparação necessária;
-3. testes em ordem de execução;
-4. valores de exemplo para cálculos quando aplicável;
-5. resultados esperados;
-6. testes de persistência;
-7. testes de entradas inválidas;
-8. regressão das funcionalidades anteriores;
-9. critério objetivo de aprovação.
+Para cada nova Sprint, adicionar neste mesmo documento: objetivo, preparação, testes em ordem, valores de exemplo, resultados esperados, persistência, entradas inválidas, regressão e critério objetivo de aprovação.
