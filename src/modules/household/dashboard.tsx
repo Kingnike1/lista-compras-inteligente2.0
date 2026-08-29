@@ -4,6 +4,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ShoppingListPanel } from "@/modules/shopping-list/panel";
 import { PricingPanel } from "@/modules/pricing/panel";
+import { PurchasePanel } from "@/modules/purchases/panel";
 import { PRODUCT_UNITS, type HouseholdProduct, type InventoryStatus, type ProductUnit, type ShoppingProfile } from "./types";
 
 const statusLabel: Record<InventoryStatus, string> = { in_stock: "Em casa", low: "Acabando", out: "Acabou" };
@@ -115,7 +116,7 @@ export function HouseholdDashboard() {
   if (loading) return <main className="app-shell"><p>Carregando Minha Casa…</p></main>;
 
   return <main className="app-shell">
-    <header className="topbar"><div><span className="badge">Sprint 3</span><h1>Minha Casa</h1><p>Estoque, lista e comparação de mercados em um só lugar.</p></div><button className="button secondary" onClick={signOut}>Sair</button></header>
+    <header className="topbar"><div><span className="badge">Sprint 4</span><h1>Minha Casa</h1><p>Estoque, planejamento, preços e fechamento da compra em um só lugar.</p></div><button className="button secondary" onClick={signOut}>Sair</button></header>
     {message && <div className="notice" role="status">{message}</div>}
     <section className="grid two">
       <form className="card" onSubmit={saveHouse}><h2>Perfil da casa</h2><label>Seu nome<input value={displayName} onChange={e=>setDisplayName(e.target.value)} placeholder="Como quer ser chamado" /></label><label>Nome da casa<input value={houseName} onChange={e=>setHouseName(e.target.value)} /></label><label>Cidade<input value={city} onChange={e=>setCity(e.target.value)} placeholder="Ex.: Goiânia" /></label><label>Perfil de compra<select value={shoppingProfile} onChange={e=>setShoppingProfile(e.target.value as ShoppingProfile)}><option value="economic">Econômico</option><option value="balanced">Equilibrado</option><option value="practical">Prático</option></select></label><button className="button" type="submit">Salvar</button></form>
@@ -124,5 +125,6 @@ export function HouseholdDashboard() {
     <section className="card inventory"><div className="section-title"><div><h2>Estoque</h2><p>{products.length} produto(s) cadastrado(s)</p></div></div>{products.length===0 ? <div className="empty">Sua casa ainda está vazia. Cadastre o primeiro produto acima.</div> : <div className="product-list">{products.map(product=>{const inv=product.inventory_items[0]; return <article className="product" key={product.id}><div className="product-main"><strong>{product.name}</strong><span>{product.brand || "Sem marca"} · {product.package_quantity ?? "—"} {product.package_unit ?? ""}</span></div><div className="stock"><button onClick={()=>changeStock(product,-1)} aria-label={`Diminuir ${product.name}`}>−</button><b>{inv?.registered_quantity ?? 0} {inv?.unit ?? ""}</b><button onClick={()=>changeStock(product,1)} aria-label={`Aumentar ${product.name}`}>+</button></div><select className={`status ${inv?.status ?? "out"}`} value={inv?.status ?? "out"} onChange={e=>setStatus(product,e.target.value as InventoryStatus)}>{Object.entries(statusLabel).map(([value,label])=><option key={value} value={value}>{label}</option>)}</select><button className="danger-link" onClick={()=>removeProduct(product)}>Remover</button></article>})}</div>}</section>
     {householdId && <ShoppingListPanel householdId={householdId} products={products} />}
     {householdId && <PricingPanel householdId={householdId} products={products} city={city} />}
+    {householdId && <PurchasePanel householdId={householdId} />}
   </main>;
 }
