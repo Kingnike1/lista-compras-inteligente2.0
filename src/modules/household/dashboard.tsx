@@ -4,6 +4,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ShoppingListPanel } from "@/modules/shopping-list/panel";
 import { PricingPanel } from "@/modules/pricing/panel";
+import { Tutorial } from "@/modules/onboarding/tutorial";
 import { PRODUCT_UNITS, type HouseholdProduct, type InventoryStatus, type ProductUnit, type ShoppingProfile } from "./types";
 
 const statusLabel: Record<InventoryStatus, string> = { in_stock: "Em casa", low: "Acabando", out: "Acabou" };
@@ -115,7 +116,7 @@ export function HouseholdDashboard() {
   if (loading) return <main className="app-shell"><p>Carregando Minha Casa…</p></main>;
 
   return <main className="app-shell">
-    <header className="topbar"><div><span className="badge">Sprint 3</span><h1>Minha Casa</h1><p>Estoque, lista e comparação de mercados em um só lugar.</p></div><button className="button secondary" onClick={signOut}>Sair</button></header>
+    <header className="topbar"><div><span className="badge">Sprint 3</span><h1>Minha Casa</h1><p>Estoque, lista e comparação de mercados em um só lugar.</p></div><div className="topbar-actions"><Tutorial compact /><button className="button secondary" onClick={signOut}>Sair</button></div></header>
     {message && <div className="notice" role="status">{message}</div>}
     <section className="grid two">
       <form className="card" onSubmit={saveHouse}><h2>Perfil da casa</h2><label>Seu nome<input value={displayName} onChange={e=>setDisplayName(e.target.value)} placeholder="Como quer ser chamado" /></label><label>Nome da casa<input value={houseName} onChange={e=>setHouseName(e.target.value)} /></label><label>Cidade<input value={city} onChange={e=>setCity(e.target.value)} placeholder="Ex.: Goiânia" /></label><label>Perfil de compra<select value={shoppingProfile} onChange={e=>setShoppingProfile(e.target.value as ShoppingProfile)}><option value="economic">Econômico</option><option value="balanced">Equilibrado</option><option value="practical">Prático</option></select></label><button className="button" type="submit">Salvar</button></form>
