@@ -22,12 +22,16 @@ Cada domínio deve expor contratos claros e evitar dependência direta desnecess
 1. A IA nunca inventa preços.
 2. Preços, orçamento, totais e cálculos financeiros são determinísticos.
 3. Preços preservam a filial física; médias de rede são apenas visões derivadas.
-4. Preços expiram por padrão em 7 dias.
+4. A política temporal de preços do 2.0 prevalece sobre a antiga regra fixa de 7 dias; validade, atualidade e elegibilidade serão definidas pelo contrato normativo de preço.
 5. Fontes de preço entram por adaptadores compatíveis com `PriceProvider`.
-6. O primeiro MVP escolhe um único mercado para a compra.
-7. Produto é identificado inicialmente por nome, marca, quantidade e unidade; EAN fica fora do MVP.
+6. O primeiro MVP concentra a compra em um único mercado; o modelo 2.0 não deve impedir um futuro plano de compra dividido entre múltiplas filiais.
+7. A interface inicial pode localizar produtos por nome, marca, quantidade e unidade e não precisa oferecer scanner. Porém, o modelo de dados deve suportar identidade forte, múltiplos identificadores e EAN/GTIN desde a fundação, conforme `2.0-contrato-produto-identidade.md`.
 8. Estoque guarda quantidade registrada e pode futuramente manter quantidade estimada separadamente.
-9. A aplicação é mobile-first e preparada para PWA/offline.
+9. A aplicação é mobile-first e preparada para PWA/offline, respeitando a decisão 2.0 de offline somente leitura no lançamento.
+
+## Precedência 2.0
+
+Este documento registra decisões do MVP original. Quando houver conflito entre uma regra antiga daqui e um contrato normativo 2.0 explicitamente congelado posteriormente, o contrato 2.0 prevalece.
 
 ## Evolução futura
 
